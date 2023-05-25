@@ -1,0 +1,25 @@
+services:
+  shopling-db:
+    image: postgis/postgis:latest
+    hostname: postgres-host
+    ports:
+      - "5432:5432"
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=shopling-password
+      - POSTGRES_USER=shopling-user
+      - POSTGRES_DB=shopling_db
+#  meetnow-spring:
+#    build:
+#      context: ./backend # specify the path to the directory containing the Dockerfile
+#      dockerfile: springapp.Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - meetnow-db
+#    environment:
+#      WAIT_HOSTS: postgres-host
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://meetnow-db:5432/meetnow_db
+#volumes:
+#  pgdata:
