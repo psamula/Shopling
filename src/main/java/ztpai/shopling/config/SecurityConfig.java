@@ -14,12 +14,14 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import ztpai.shopling.config.jwt.JwtConfig;
 import ztpai.shopling.config.jwt.filters.JwtTokenVerifier;
 import ztpai.shopling.config.jwt.filters.JwtUsernamePasswordAuthenticationFilter;
 import ztpai.shopling.config.user.CustomUserDetailsService;
 import ztpai.shopling.repository.UserRepository;
-import ztpai.shopling.service.UserService;
 
 import javax.crypto.SecretKey;
 import java.util.Arrays;
@@ -53,14 +55,13 @@ public class SecurityConfig {
             "/webjars/**",
             // -- Swagger UI v3 (OpenAPI)
             "/v3/api-docs/**",
-
     };
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.csrf().disable()
+                .cors()
+                .and()
                 .authorizeHttpRequests((authorize) -> authorize
                         .mvcMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated())
@@ -73,9 +74,7 @@ public class SecurityConfig {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
         return http.build();
-
     }
     @Bean
     UserDetailsService userDetailsService() {
@@ -98,11 +97,26 @@ public class SecurityConfig {
         return new ProviderManager(Arrays.asList(daoAuthenticationProvider()));
     }
     @Bean
-    public UserService authorizedUserFacade() {
-        return new UserService(userRepository);
-    }
-    @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return new CustomAuthenticationEntryPoint();
+    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+
+        // Set allowed origins, methods, headers, etc.
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173", "http://127.0.0.1:3000", "http://127.0.0.1:8080")); // replace with your actual origin
+        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type", "Authentication"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type", "Authentication"));
+
+
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 }
