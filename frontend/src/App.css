@@ -1,0 +1,24 @@
+.App {
+  text-align: left;
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  font-size: 3em;
+}
+.text{
+  margin-top: -2%;
+  margin-bottom: 2%;
+}
+img{
+  height: 50%;
+}
+.orgbtn{
+  width: 15%;
+  height: 8%;
+}
+a{
+  text-decoration: none;
+}

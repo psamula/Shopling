@@ -1,0 +1,123 @@
+{
+  "events": [
+    {
+      "id": 2,
+      "participants": [{ "id": 1, "name": "Adrian Szlag" }],
+      "title": "Kosciuszkon- Hackaton",
+      "description": "24h of coding with free pizza and drinks",
+      "type": "event",
+      "image": "kosciuszkon.jpg",
+      "coordinates": [19.99629671664809, 50.08399993925693]
+    },
+    {
+      "id": 1,
+      "participants": [{ "id": 2, "name": "Paweł Samuła" }],
+      "title": "Chess Tournament",
+      "description": "Don't play D4",
+      "type": "event",
+      "image": "szachy.jpg",
+      "coordinates": [19.94173898739982, 50.071942298900524]
+    },
+    {
+      "id": 3,
+      "participants": [{ "id": 3, "name": "Szymon Salamon" }],
+      "title": "Basketball Match",
+      "description": "Let's play match like Michael Jordan",
+      "type": "sport",
+      "image": "koszykowka.jpg",
+      "coordinates": [19.9142067426134025, 50.06115043929323]
+    },
+    {
+      "id": 4,
+      "participants": [{ "id": 4, "name": "Borys Karton" }],
+      "title": "PK get together",
+      "description": "Talking with eating",
+      "type": "sport",
+      "image": "miasto.jpg",
+      "coordinates": [19.941015236678783, 50.06301434728838]
+    },
+    {
+      "id": 5,
+      "participants": [{ "id": 5, "name": "Adam Wkretka" }],
+      "title": "House Party",
+      "description": "Buy some pizza and drink",
+      "type": "party",
+      "image": "domowka.jpg",
+      "coordinates": [19.971400758179364, 50.081457939328864]
+    },
+    {
+      "id": 6,
+      "participants": [{ "id": 6, "name": "Bartlomir Slowik" }],
+      "title": "Calculus in C prelection",
+      "description": "Let's make some exercise from counting method",
+      "type": "party",
+      "image": "MO.jpg",
+      "coordinates": [19.9087720049917, 50.07584385679228]
+    },
+    {
+      "id": 7,
+      "participants": [{ "id": 8, "name": "Kuc" }],
+      "title": "Chilling",
+      "description": "Chilling and vibing next to Wisla",
+      "type": "party",
+      "image": "rzeka.jpg",
+      "coordinates": [19.968967706870806, 50.053455420944545]
+    },
+    {
+      "id": 8,
+      "participants": [{ "id": 8, "name": "Kuc" }],
+      "title": "Basketball Match",
+      "description": "Need 2 ppl to play with us",
+      "type": "sport",
+      "image": "Kosz.jpg",
+      "coordinates": [19.995934765275873, 50.086139570390586]
+    },
+    {
+      "id": 9,
+      "participants": [{ "id": 4, "name": "Borys Karton" }],
+      "title": "Study Together",
+      "description": "Can someone help me with Algebra?",
+      "type": "sport",
+      "image": "algebra.jpg",
+      "coordinates": [19.997880308725023, 50.086144820067254]
+    },
+    {
+      "id": 10,
+      "participants": [{ "id": 10, "name": "Kot" }],
+      "title": "Quick Poker",
+      "description": "Need a 4th person to play some",
+      "type": "event",
+      "image": "poker.jpeg",
+      "coordinates": [20.001129974664742, 50.08522376435156]
+    }
+  ],
+  "memories": [
+    {
+      "id": 11,
+      "participants": [{ "id": 11, "name": "Tesla" }],
+      "title": "Hakaton jakis inny",
+      "description": "24h of coding with free pizza and drinks",
+      "type": "event",
+      "image": "kosciuszkon.jpg",
+      "coordinates": [19.99629671664809, 50.08399993925693]
+    },
+    {
+      "id": 12,
+      "participants": [{ "id": 12, "name": "Edison" }],
+      "title": "Robienie taska",
+      "description": "bartek zrob taska",
+      "type": "event",
+      "image": "miasto.jpg",
+      "coordinates": [19.99629671664809, 50.08399993925693]
+    },
+    {
+      "id": 13,
+      "participants": [{ "id": 1, "name": "Adrian Szlag" }],
+      "title": "Szachy w memories",
+      "description": "nw co pisac juz",
+      "type": "event",
+      "image": "szachy.jpg",
+      "coordinates": [19.99629671664809, 50.08399993925693]
+    }
+  ]
+}

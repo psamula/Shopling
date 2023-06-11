@@ -1,0 +1,17 @@
+.Box{
+    background-color: #161212;
+    display: flex;
+    justify-content: center;
+    color:white;
+    margin: 2%;
+    font-size: 1.5em;
+    width: 70%;
+    position: relative;
+    border-radius: 50px;
+    text-decoration: none;
+}
+p{
+position: absolute;
+  bottom: 0;
+  right: 5%;
+}
