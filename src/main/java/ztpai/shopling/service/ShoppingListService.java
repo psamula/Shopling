@@ -139,6 +139,7 @@ public class ShoppingListService {
         var productEntity = new ProductEntity();
         productEntity.setName(productCreationDto.getProductName());
         productEntity.setList(shoppingListEntity);
+        productEntity.setTaken(Boolean.FALSE);
 
         var savedEntity = productRepository.save(productEntity);
 
