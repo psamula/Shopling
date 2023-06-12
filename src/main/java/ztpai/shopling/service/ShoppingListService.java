@@ -30,6 +30,7 @@ public class ShoppingListService {
         shortListDto.setName(shoppingListEntity.getName());
         shortListDto.setProductListSize(shoppingListEntity.getProducts().size());
         shortListDto.setCreatedAt(shoppingListEntity.getCreatedAt());
+        shortListDto.setNumberOfTakenProducts(countAllTakenOfList(shoppingListEntity));
 
         return shortListDto;
     }
@@ -174,5 +175,24 @@ public class ShoppingListService {
         }
         productEntity.setTaken(taken);
         productRepository.save(productEntity);
+    }
+    public Integer countAllTakenOfList(ShoppingListEntity shoppingListEntity) {
+        if (shoppingListEntity.getProducts() == null) {
+            return 0;
+        }
+        return (int)shoppingListEntity.getProducts().stream()
+                .filter(ProductEntity::getTaken)
+                .count();
+    }
+    @Transactional
+    public void clearTakenOfList(Long listId) {
+        Long currentUserId = userService.getCurrentUserId();
+        var shoppingListEntity = shoppingListRepository.findById(listId)
+                .orElseThrow(() -> new EntityNotFoundException("No list of id " + listId));
+        if (!currentUserId.equals(shoppingListEntity.getAuthor().getId())) {
+            throw new IllegalArgumentException("Invalid operation, current user is not the author of the list");
+        }
+        shoppingListEntity.getProducts().forEach(pr -> pr.setTaken(false));
+        shoppingListRepository.save(shoppingListEntity);
     }
 }

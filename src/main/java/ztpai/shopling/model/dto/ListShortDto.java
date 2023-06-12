@@ -13,4 +13,5 @@ public class ListShortDto {
     private String name;
     private LocalDate createdAt;
     private Integer productListSize;
+    private Integer numberOfTakenProducts;
 }

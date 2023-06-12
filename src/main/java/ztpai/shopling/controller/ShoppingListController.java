@@ -49,4 +49,8 @@ public class ShoppingListController {
     public void deleteProduct(@PathVariable Long productId) {
         this.shoppingListService.deleteProduct(productId);
     }
+    @PostMapping("/{listId}/clear-taken")
+    public void clearTakenOfList(@PathVariable Long listId) {
+        this.shoppingListService.clearTakenOfList(listId);
+    }
 }
