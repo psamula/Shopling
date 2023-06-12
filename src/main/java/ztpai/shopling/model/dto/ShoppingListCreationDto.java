@@ -10,5 +10,4 @@ import java.util.List;
 @Setter
 public class ShoppingListCreationDto {
     private String name;
-    private List<ProductDto> productList;
 }

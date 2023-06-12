@@ -16,6 +16,7 @@ import ztpai.shopling.repository.ShoppingListRepository;
 import javax.persistence.Entity;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,12 +31,16 @@ public class ShoppingListService {
         ListShortDto shortListDto = new ListShortDto();
         shortListDto.setId(shoppingListEntity.getId());
         shortListDto.setName(shoppingListEntity.getName());
+        shortListDto.setProductListSize(shoppingListEntity.getProducts().size());
         shortListDto.setCreatedAt(shoppingListEntity.getCreatedAt());
 
         return shortListDto;
     }
     private ListFullDto convertToListFullDto(ShoppingListEntity shoppingListEntity) {
         ListFullDto listFullDto = new ListFullDto();
+        if (shoppingListEntity.getProducts() == null) {
+            shoppingListEntity.setProducts(new ArrayList<>());
+        }
         List<ProductDto> productDtoList = shoppingListEntity.getProducts().stream()
                 .map(this::convertToProductDto)
                 .collect(Collectors.toList());
@@ -117,14 +122,6 @@ public class ShoppingListService {
         shoppingListEntity.setAuthor(userEntity);
 
         ShoppingListEntity savedShoppingListEntity = shoppingListRepository.save(shoppingListEntity);
-
-        List<ProductEntity> productEntities = shoppingListCreationDto.getProductList().stream()
-                .map(productDto -> convertToProductEntity(productDto, savedShoppingListEntity))
-                .collect(Collectors.toList());
-
-        productEntities = productRepository.saveAll(productEntities);
-
-        savedShoppingListEntity.setProducts(productEntities);
 
         return convertToListFullDto(savedShoppingListEntity);
     }
