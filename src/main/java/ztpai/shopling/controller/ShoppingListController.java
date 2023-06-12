@@ -28,7 +28,7 @@ public class ShoppingListController {
         return shoppingListService.getShoppingLists();
     }
     @PutMapping("/products")
-    public void takeAProduct(CheckboxDto checkboxDto) {
+    public void takeAProduct(@RequestBody CheckboxDto checkboxDto) {
         this.shoppingListService.takeAProduct(checkboxDto);
     }
 
