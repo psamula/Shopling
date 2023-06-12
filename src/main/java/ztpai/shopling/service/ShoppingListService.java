@@ -48,6 +48,7 @@ public class ShoppingListService {
     }
     private ProductDto convertToProductDto (ProductEntity productEntity) {
         ProductDto productDto = new ProductDto();
+        productDto.setId(productEntity.getId());
         productDto.setName(productEntity.getName());
         return productDto;
     }
