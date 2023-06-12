@@ -6,10 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ztpai.shopling.model.ProductEntity;
 import ztpai.shopling.model.ShoppingListEntity;
 import ztpai.shopling.model.UserEntity;
-import ztpai.shopling.model.dto.ListFullDto;
-import ztpai.shopling.model.dto.ListShortDto;
-import ztpai.shopling.model.dto.ProductDto;
-import ztpai.shopling.model.dto.ShoppingListCreationDto;
+import ztpai.shopling.model.dto.*;
 import ztpai.shopling.repository.ProductRepository;
 import ztpai.shopling.repository.ShoppingListRepository;
 
@@ -127,4 +124,38 @@ public class ShoppingListService {
     }
 
 
+    @Transactional
+    public ProductDto addProduct(ProductCreationDto productCreationDto) {
+        var currentUserId = userService.getCurrentUserId();
+
+        var shoppingListEntity = shoppingListRepository.findById(productCreationDto.getListId())
+                .orElseThrow(() -> new EntityNotFoundException("No list of id " + productCreationDto.getListId()));
+
+        if (!currentUserId.equals(shoppingListEntity.getAuthor().getId())) {
+            throw new IllegalArgumentException("Invalid list id " + productCreationDto.getListId());
+        }
+
+        var productEntity = new ProductEntity();
+        productEntity.setName(productCreationDto.getProductName());
+        productEntity.setList(shoppingListEntity);
+
+        var savedEntity = productRepository.save(productEntity);
+
+        return convertToProductDto(savedEntity);
+    }
+    @Transactional
+    public void deleteProduct(Long productId) {
+        var currentUserId = userService.getCurrentUserId();
+
+        var productEntity = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("No product of id " + productId));
+
+        var shoppingListEntity = productEntity.getList();
+
+        if (!currentUserId.equals(shoppingListEntity.getAuthor().getId())) {
+            throw new IllegalArgumentException("Invalid operation, current user is not the author of the list this product belongs to.");
+        }
+
+        productRepository.delete(productEntity);
+    }
 }

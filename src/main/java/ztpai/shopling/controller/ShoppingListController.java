@@ -2,9 +2,7 @@ package ztpai.shopling.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ztpai.shopling.model.dto.ListFullDto;
-import ztpai.shopling.model.dto.ListShortDto;
-import ztpai.shopling.model.dto.ShoppingListCreationDto;
+import ztpai.shopling.model.dto.*;
 import ztpai.shopling.service.ShoppingListService;
 
 import java.util.List;
@@ -38,5 +36,12 @@ public class ShoppingListController {
     public String securedHello() {
         return "hello";
     }
-
+    @PostMapping("/products")
+    public ProductDto addProduct(@RequestBody ProductCreationDto productCreationDto) {
+        return this.shoppingListService.addProduct(productCreationDto);
+    }
+    @DeleteMapping("/products/{productId}")
+    public void deleteProduct(@PathVariable Long productId) {
+        this.shoppingListService.deleteProduct(productId);
+    }
 }
