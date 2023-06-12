@@ -11,7 +11,7 @@ import ztpai.shopling.config.auth.AuthenticationRequest;
 @CrossOrigin
 
 public class LoginController {
-    @ApiOperation("Log in and gain access to all your ratings")
+    @ApiOperation("Log in and gain access to all your shopping lists")
     @PostMapping("/login")
     public void login (@RequestBody AuthenticationRequest credentials) {}
 }

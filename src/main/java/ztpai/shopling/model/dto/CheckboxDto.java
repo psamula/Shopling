@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductDto {
-    Long id;
-    String name;
-    Boolean taken;
+public class CheckboxDto {
+    private Long productId;
+    private Boolean taken;
 }

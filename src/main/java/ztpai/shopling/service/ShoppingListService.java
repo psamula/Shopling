@@ -52,6 +52,7 @@ public class ShoppingListService {
         ProductDto productDto = new ProductDto();
         productDto.setId(productEntity.getId());
         productDto.setName(productEntity.getName());
+        productDto.setTaken(productEntity.getTaken());
         return productDto;
     }
 
@@ -157,5 +158,20 @@ public class ShoppingListService {
         }
 
         productRepository.delete(productEntity);
+    }
+
+    @Transactional
+    public void takeAProduct(CheckboxDto checkboxDto) {
+        Long productId = checkboxDto.getProductId();
+        Boolean taken = checkboxDto.getTaken();
+        Long currentUserId = userService.getCurrentUserId();
+        var productEntity = productRepository.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("No product of id " + productId));
+        var shoppingListEntity = productEntity.getList();
+        if (!currentUserId.equals(shoppingListEntity.getAuthor().getId())) {
+            throw new IllegalArgumentException("Invalid operation, current user is not the author of the list this product belongs to.");
+        }
+        productEntity.setTaken(taken);
+        productRepository.save(productEntity);
     }
 }

@@ -20,7 +20,7 @@ import javax.validation.Valid;
 public class RegistrationController {
     private final RegistrationFacade registrationFacade;
 
-    @ApiOperation("Register to the meet-now")
+    @ApiOperation("Register to the Shopling")
     @PostMapping("/register")
     public ResponseEntity<RegistrationResponse> registerUser (
             @RequestBody @Valid final RegistrationRequest registrationRequest) {

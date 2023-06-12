@@ -24,4 +24,6 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "list_id")
     private ShoppingListEntity list;
+
+    private Boolean taken;
 }

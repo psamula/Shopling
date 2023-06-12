@@ -27,6 +27,11 @@ public class ShoppingListController {
     public List<ListShortDto> getShoppingLists() {
         return shoppingListService.getShoppingLists();
     }
+    @PutMapping("/products")
+    public void takeAProduct(CheckboxDto checkboxDto) {
+        this.shoppingListService.takeAProduct(checkboxDto);
+    }
+
     @PostMapping("/create")
     public ListFullDto createShoppingList(@RequestBody ShoppingListCreationDto shoppingListCreationDto) {
         return shoppingListService.createShoppingList(shoppingListCreationDto);
