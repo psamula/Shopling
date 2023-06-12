@@ -13,6 +13,7 @@ import ztpai.shopling.model.dto.ShoppingListCreationDto;
 import ztpai.shopling.repository.ProductRepository;
 import ztpai.shopling.repository.ShoppingListRepository;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ShoppingListService {
         List<ProductDto> productDtoList = shoppingListEntity.getProducts().stream()
                 .map(this::convertToProductDto)
                 .collect(Collectors.toList());
-
+        listFullDto.setId(shoppingListEntity.getId());
         listFullDto.setName(shoppingListEntity.getName());
         listFullDto.setProductDtoList(productDtoList);
         listFullDto.setCreatedAt(shoppingListEntity.getCreatedAt());
@@ -72,6 +73,37 @@ public class ShoppingListService {
         productEntity.setList(shoppingListEntity);
 
         return productEntity;
+    }
+    @Transactional
+    public ListFullDto editShoppingList(ListFullDto listFullDto) {
+        var currentUserId = userService.getCurrentUserId();
+        var shoppingListEntityOpt = shoppingListRepository.findById(listFullDto.getId());
+
+        if (shoppingListEntityOpt.isEmpty()) {
+            throw new EntityNotFoundException("There's no shopping list with id " + listFullDto.getId());
+        }
+
+        var shoppingListEntity = shoppingListEntityOpt.get();
+
+        if (!shoppingListEntity.getAuthor().getId().equals(currentUserId)) {
+            throw new IllegalArgumentException("Invalid list id: " + shoppingListEntity.getId());
+        }
+
+        shoppingListEntity.setName(listFullDto.getName());
+        shoppingListRepository.save(shoppingListEntity);
+
+        return convertToListFullDto(shoppingListEntity);
+    }
+    public void deleteShoppingList(Long id) {
+        Long currentUserId = userService.getCurrentUserId();
+        var shoppingListEntity = shoppingListRepository.findById(id);
+        if (shoppingListEntity.isEmpty()) {
+            throw new EntityNotFoundException("No shopping list with id " + id);
+        }
+        if (shoppingListEntity.get().getAuthor().getId() != currentUserId) {
+            throw new IllegalArgumentException("Invalid list id " + id);
+        }
+        shoppingListRepository.deleteById(id);
     }
 
     @Transactional

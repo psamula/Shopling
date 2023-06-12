@@ -27,7 +27,7 @@ public class ShoppingListEntity {
     @JoinColumn(name = "author_id")
     private UserEntity author;
 
-    @OneToMany(mappedBy = "list")
+    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductEntity> products;
 
     @Column(name = "created_at")

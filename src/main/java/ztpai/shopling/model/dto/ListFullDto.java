@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ListFullDto {
+    private Long id;
     private String name;
     private List<ProductDto> productDtoList;
     private LocalDate createdAt;

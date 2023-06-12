@@ -17,6 +17,14 @@ public class ShoppingListController {
     public ListFullDto getShoppingList(@PathVariable Long listId) {
         return shoppingListService.getShoppingList(listId);
     }
+    @PutMapping("/")
+    public ListFullDto editShoppingList(@RequestBody ListFullDto listFullDto) {
+        return shoppingListService.editShoppingList(listFullDto);
+    }
+    @DeleteMapping("/{listId}")
+    public void deleteShoppingList(@PathVariable Long listId) {
+        shoppingListService.deleteShoppingList(listId);
+    }
     @GetMapping("/")
     public List<ListShortDto> getShoppingLists() {
         return shoppingListService.getShoppingLists();
