@@ -48,7 +48,7 @@ const Input = ({
   return (
     
     <div className="mb-4 ">
-      <div className="border-b border-purple-400 ">
+      <div className="border-b border-white text-white ">
       <input
         type={type}
         placeholder={placeholder}
@@ -57,7 +57,7 @@ const Input = ({
         onBlur={onBlurHandler}
         name={name}
         id={name}
-        className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" 
+        className="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none" 
       />
       </div>
        <p className={`text-xs text-red-500 ${error ? "" : "invisible"}`}>

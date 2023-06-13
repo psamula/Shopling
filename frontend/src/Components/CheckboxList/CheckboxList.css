@@ -7,10 +7,13 @@
   display: flex;
   justify-content: center;
   font-size: 2em;
-  border: solid orangered 2px;
   }
 .Shoplist{
   background-color: #514949;
   width: 60%;
   margin:2%;
+}
+.delete-button-l{
+  color:red;
+  margin-left: 2%;
 }

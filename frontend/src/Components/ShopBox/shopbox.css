@@ -1,17 +1,23 @@
 .Box{
-    background-color: #161212;
+    background-color: #FF621F;
     display: flex;
     justify-content: center;
     color:white;
     margin: 2%;
-    font-size: 1.5em;
+    font-size: 1.2em;
     width: 70%;
     position: relative;
     border-radius: 50px;
     text-decoration: none;
+    padding: 20px;
+    text-align: center;
 }
-p{
+.counter{
 position: absolute;
   bottom: 0;
+}
+.delete-button{
+  position: absolute;
   right: 5%;
+  
 }

@@ -4,7 +4,7 @@ interface Props {
   loading?: boolean;
 }
 const myStyle = {
-  background: 'linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)'
+  background: '#F67B05'
 };
 
 const Button = ({ text, disabled, loading }: Props) => {
